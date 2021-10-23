@@ -203,7 +203,7 @@ public class LocalVotingAlgorithm {
                 append(this.rightSpeed).append(";").
                 append(this.counter).append(";").
                 append(this.avoidObstacleCounter).append(";").
-                append(this.p);
+                append(this.p).append(";");
         return msg.toString();
     }
 }

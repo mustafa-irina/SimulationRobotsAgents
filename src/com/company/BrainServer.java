@@ -65,9 +65,9 @@ public class BrainServer {
         public void run() {
             try {
                 while (!client.isClosed()) {
-                    robotMessage = null;
+                    //robotMessage = null;
                     robotMessage = buff_in.readLine();
-                    System.out.println(robotMessage);
+                    //System.out.println(robotMessage);
                     if (robotMessage != null) {
                         if (!robotMessage.isEmpty()) {
                             robotSentMessage = true;

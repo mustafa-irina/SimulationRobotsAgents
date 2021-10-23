@@ -121,13 +121,13 @@ class RobotCommunicationInput extends CyclicBehaviour {
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }
-        block(time_out);
+        //block(time_out);
     }
 
     private void setConfidenceValue(String robot_message) {
         if (robot_message == null) {
             System.out.println(myAgent.getLocalName() + " get null");
-            System.exit(0);
+            //System.exit(0);
             return;
         }
         String [] buff = robot_message.split(";");
@@ -170,7 +170,7 @@ class RobotCommunicationOutput extends CyclicBehaviour {
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }
-        block(time_out);
+        //block(time_out);
     }
 }
 
@@ -242,7 +242,12 @@ class AgentsCommunication_Radio extends CyclicBehaviour {
             //System.out.println(myAgent.getLocalName() + ": sending message to all --- " + msg.getContent());
             myAgent.send(msg);
         }
-        block(time_out);
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //block(time_out);
 
     }
 }
@@ -281,8 +286,8 @@ class AgentsCommunication_Listener extends CyclicBehaviour {
                 ACLMessage msg = myAgent.receive();
                 if (msg != null) {
                     String msg_name = msg.getSender().getLocalName();
-                    all.append(msg_name).append(" ");
                     if (!msg_name.equals(myAgent.getLocalName()) && msg_name.startsWith("Brain")) { //!msg_name.equalsIgnoreCase("df") && !msg_name.equalsIgnoreCase("ams") && !msg_name.equalsIgnoreCase(myAgentBrain.getName())
+                        all.append(msg_name).append(" ");
                         Double [] vector = Arrays.stream(msg.getContent().split(";")).map(Double::parseDouble).toArray(Double[]::new);
                         matrix[i][0] = vector[0];
                         matrix[i][1] = vector[1];
@@ -305,6 +310,6 @@ class AgentsCommunication_Listener extends CyclicBehaviour {
             this.k_t = n - 3;
             this.k = n - 3;
         }
-        block(time_out);
+        //block(time_out);
     }
 }
